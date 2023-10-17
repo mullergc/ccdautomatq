@@ -1,8 +1,8 @@
 source('R/dependencies.R')
 
-get_query_auto <- function(username,vpassword,vdbname,query){
+get_query_auto <- function(username,password,dbname,query){
   drv <- dbDriver("Oracle")
-  con <- dbConnect(drv, username = vusername, password = vpassword, dbname = vdbname)
+  con <- dbConnect(drv, username = username, password = password, dbname = dbname)
   result <- dbGetQuery(con, query)
 
   # Close the database connection
@@ -23,10 +23,10 @@ get_query_window <- function(query){
                      title = "Database", message = "Which database", default = "HCPAOPS.WORLD")
   )
 
-        result <- dbGetQuery(con, query)
+  result <- dbGetQuery(con, query)
 
-        # Close the database connection
-        dbDisconnect(con)
+  # Close the database connection
+  dbDisconnect(con)
 
-        return(result)
+  return(result)
 }

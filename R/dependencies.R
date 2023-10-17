@@ -1,0 +1,6 @@
+library(ROracle)
+library(googledrive)
+library(googlesheets4)
+library(lubridate)
+library(tidyverse)
+library(jsonlite)
