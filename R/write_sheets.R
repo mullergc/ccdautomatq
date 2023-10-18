@@ -1,3 +1,5 @@
+require('dplyr')
+
 write_query_sheet <- function(df, url_destiny, sheetname = 'Página1', date_change = FALSE) {
   if (!date_change) {
     df_final <- df

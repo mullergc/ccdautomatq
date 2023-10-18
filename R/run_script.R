@@ -10,63 +10,6 @@ require('lubridate')
 require('googledrive')
 require('devtools')
 
-get_query_auto <- function(username,vpassword,vdbname,query){
-  drv <- DBI::dbDriver("Oracle")
-  con <- DBI::dbConnect(drv, username = vusername, password = vpassword, dbname = vdbname)
-  result <- dbGetQuery(con, query)
-
-  # Close the database connection
-  dbDisconnect(con)
-
-  return(result)
-}
-
-
-get_query_window <- function(query){
-  drv <- dbDriver("Oracle")
-  con <- dbConnect(drv,
-                   username = rstudioapi::showPrompt(
-                     title = "Username", message = "Username", default = ""
-                   ),
-                   password = rstudioapi::askForPassword(prompt = "Password"),
-                   dbname = rstudioapi::showPrompt(
-                     title = "Database", message = "Which database", default = "HCPAOPS.WORLD")
-  )
-
-  result <- dbGetQuery(con, query)
-
-  # Close the database connection
-  dbDisconnect(con)
-
-  return(result)
-}
-
-write_query_sheet <- function(df, url_destiny, sheetname = 'Página1', date_change = FALSE) {
-  if (!date_change) {
-    df_final <- df
-  } else {
-    date_columns <- grep("DT|DTHR|DATA", names(df), value = TRUE)
-    df_final <- df %>%
-      dplyr::mutate(across(all_of(date_columns), ~ parse_date_time(.x, c("ymd HMS",'ymd','dmy','dmy HMS'),tz='UTC')))
-  }
-
-  googlesheets4::write_sheet(df_final, ss = url_destiny, sheet = sheetname)
-}
-
-read_sql <- function(email,url) {
-
-  googledrive::drive_auth(email = email)
-
-  codigo <- googledrive::drive_read_string(url,  encoding = "UTF8")
-  #cat(codigo,sep = "\n")
-  # temp_file <- tempfile()
-  # writeLines(codigo, temp_file)
-  # source(temp_file)
-  # rm(temp_file) # limpa da memória o arquivo temp_file
-  googlesheets4::gs4_auth(token = googledrive::drive_token())
-  return(codigo)
-
-}
 
 
 # Define a function to log errors

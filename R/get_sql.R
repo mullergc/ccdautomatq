@@ -1,3 +1,6 @@
+library(googledrive)
+library(googlesheets4)
+
 read_sql <- function(email,url) {
 
 googledrive::drive_auth(email = email)

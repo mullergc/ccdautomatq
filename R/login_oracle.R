@@ -1,9 +1,10 @@
-source('R/dependencies.R')
+require('ROracle')
 library(ROracle)
+
 get_query_auto <- function(username,vpassword,vdbname,query){
   drv <- DBI::dbDriver("Oracle")
-  con <- DBI::dbConnect(drv, username = vusername, password = vpassword, dbname = vdbname)
-  result <- dbGetQuery(con, query)
+  con <- ROracle::dbConnect(drv, username = vusername, password = vpassword, dbname = vdbname)
+  result <- ROracle::dbGetQuery(con, query)
 
   # Close the database connection
   dbDisconnect(con)
