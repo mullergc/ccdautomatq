@@ -23,3 +23,4 @@ Collate:
   'get_query.R'
   'dependencies.R'
   'login_oracle.R'
+  'run_script.R'
