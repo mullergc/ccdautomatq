@@ -10,13 +10,13 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    devtools,
-    dplyr,
-    googledrive,
-    googlesheets4,
-    jsonlite,
-    lubridate,
-    ROracle
+  ROracle,
+  googlesheets4,
+  dplyr,
+  jsonlite,
+  lubridate,
+  googledrive,
+  devtools
 Collate:
   'get_sql.R'
   'write_sheets.R'
