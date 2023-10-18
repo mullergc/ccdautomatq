@@ -17,7 +17,7 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
     creds_text <- readLines(credspath, warn = FALSE)
 
     # Parse the JSON text
-    creds <- fromJSON(creds_text)
+    creds <- jsonlite::fromJSON(creds_text)
     # Extract the credentials
     sql <- read_sql(email = creds$email, password = creds$email_pass, url = url_sql)
 

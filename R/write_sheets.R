@@ -4,8 +4,8 @@ write_query_sheet <- function(df, url_destiny, sheetname = 'Página1', date_chan
   } else {
     date_columns <- grep("DT|DTHR|DATA", names(df), value = TRUE)
     df_final <- df %>%
-      mutate(across(all_of(date_columns), ~ parse_date_time(.x, c("ymd HMS",'ymd','dmy','dmy HMS'),tz='UTC')))
+      dplyr::mutate(across(all_of(date_columns), ~ parse_date_time(.x, c("ymd HMS",'ymd','dmy','dmy HMS'),tz='UTC')))
   }
 
-  write_sheet(df_final, ss = url_destiny, sheet = sheetname)
+  googlesheets4::write_sheet(df_final, ss = url_destiny, sheet = sheetname)
 }
