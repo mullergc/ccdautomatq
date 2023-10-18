@@ -1,9 +1,9 @@
 source('R/dependencies.R')
 
 get_query_auto <- function(usernamedb,passwordb,dbname,query){
-  drv <- dbDriver("Oracle")
-  con <- dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
-  result <- dbGetQuery(con, query)
+  drv <- DBI::dbDriver("Oracle")
+  con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
+  result <- ROracle::dbGetQuery(con, query)
 
   # Close the database connection
   dbDisconnect(con)
@@ -13,8 +13,8 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
 
 
 get_query_window <- function(query){
-  drv <- dbDriver("Oracle")
-  con <- dbConnect(drv,
+  drv <- DBI::dbDriver("Oracle")
+  con <- ROracle::dbConnect(drv,
                    username = rstudioapi::showPrompt(
                      title = "Username", message = "Username", default = ""
                    ),
@@ -23,7 +23,7 @@ get_query_window <- function(query){
                      title = "Database", message = "Which database", default = "HCPAOPS.WORLD")
   )
 
-  result <- dbGetQuery(con, query)
+  result <- ROracle::dbGetQuery(con, query)
 
   # Close the database connection
   dbDisconnect(con)
