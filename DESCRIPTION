@@ -18,7 +18,6 @@ Imports:
   googledrive,
   devtools
 Depends:
-  ROracle,
   googlesheets4,
   dplyr,
   jsonlite,

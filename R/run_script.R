@@ -2,14 +2,7 @@
 # source('get_sql.R')
 # source('write_sheets.R')
 
-library('ROracle')
-library('googlesheets4')
-library('dplyr')
-library('jsonlite')
-library('lubridate')
-library('googledrive')
-library('devtools')
-
+library(ROracle)
 
 
 # Define a function to log errors

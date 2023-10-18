@@ -1,11 +1,3 @@
-library(ROracle)
-library(googledrive)
-library(googlesheets4)
-library(lubridate)
-library(tidyverse)
-library(jsonlite)
-library(devtools)
-
 # Add a dependency
 use_package('ROracle')
 use_package('googlesheets4')
