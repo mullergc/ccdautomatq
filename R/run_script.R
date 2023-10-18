@@ -11,18 +11,6 @@ require('googledrive')
 require('devtools')
 
 
-get_query_auto <- function(usernamedb,passwordb,dbname,query){
-  drv <- dbDriver("Oracle")
-  con <- dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
-  result <- dbGetQuery(con, query)
-
-  # Close the database connection
-  dbDisconnect(con)
-
-  return(result)
-}
-
-
 
 # Define a function to log errors
 log_error <- function(error_msg,num_chamado) {

@@ -1,5 +1,5 @@
 source('R/dependencies.R')
-
+library(ROracle)
 get_query_auto <- function(username,vpassword,vdbname,query){
   drv <- dbDriver("Oracle")
   con <- dbConnect(drv, username = vusername, password = vpassword, dbname = vdbname)
