@@ -1,7 +1,1 @@
-2023-10-17 19:02:12 - Error: ORA-04088: erro durante a execução do gatilho 'FIREWALL.TG_FIREWALL_LOGON'
-ORA-00604: ocorreu um erro no nível 1 SQL recursivo
-ORA-20001: Acesso ao Banco de Dados não permitido. Informe imediatamente a CGTI através de abertura de chamado!
-ORA-06512: em "FIREWALL.PR_FIREWALL_VALIDATE_LOGON", line 177
-ORA-06512: em "FIREWALL.PR_FIREWALL_VALIDATE_LOGON", line 177
-ORA-06512: em line 3
-
+2023-10-18 09:05:59 - Error: argument "credspath" is missing, with no default
