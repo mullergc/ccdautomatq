@@ -1,5 +1,5 @@
 # Add a dependency
-usethis::use_package('ROracle')
+#usethis::use_package('ROracle')
 usethis::use_package('googlesheets4')
 usethis::use_package('dplyr')
 usethis::use_package('jsonlite')
