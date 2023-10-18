@@ -18,12 +18,8 @@ Imports:
   googledrive,
   devtools
 Depends:
-  googlesheets4,
   dplyr,
-  jsonlite,
   lubridate,
-  googledrive,
-  devtools
 Collate:
   'get_sql.R'
   'write_sheets.R'
