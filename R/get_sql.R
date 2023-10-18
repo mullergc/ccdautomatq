@@ -8,7 +8,7 @@ codigo <- googledrive::drive_read_string(url,  encoding = "UTF8")
   # writeLines(codigo, temp_file)
   # source(temp_file)
   # rm(temp_file) # limpa da memória o arquivo temp_file
-  googlesheets4::gs4_auth(token = drive_token())
+  googlesheets4::gs4_auth(token = googledrive::drive_token())
   return(codigo)
 
 }
