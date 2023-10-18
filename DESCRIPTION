@@ -19,7 +19,7 @@ Imports:
   devtools
 Depends:
   dplyr,
-  lubridate,
+  lubridate
 Collate:
   'get_sql.R'
   'write_sheets.R'

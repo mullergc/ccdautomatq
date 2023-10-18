@@ -1,7 +1,3 @@
-# #source('R/get_query.R')
-# source('get_sql.R')
-# source('write_sheets.R')
-
 library(ROracle)
 
 
