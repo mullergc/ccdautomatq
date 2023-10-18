@@ -20,12 +20,11 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
     creds <- jsonlite::fromJSON(creds_text)
     # Extract the credentials
     email <- creds$email
-    email_pass <- creds$email_pass
     username <- creds$username
     password <- creds$pass
     dbname <- creds$dbname
     sql <- read_sql(email =email, password = email_pass, url = url_sql)
-    r <- get_query_auto(username = username, password = password, dbname = dbname, query = sql)
+    r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
     # Success message

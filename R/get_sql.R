@@ -1,4 +1,4 @@
-read_sql <- function(email,password,url) {
+read_sql <- function(email,url) {
 
 googledrive::drive_auth(email = email)
 
