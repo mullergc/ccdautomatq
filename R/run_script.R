@@ -10,7 +10,7 @@ log_error <- function(error_msg) {
 }
 
 # Define your run_function
-run_function <- function(url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Página1') {
+run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Página1') {
   # Use tryCatch to handle errors
   tryCatch({
     # Read the JSON file as text
@@ -18,18 +18,11 @@ run_function <- function(url_sql, url_sheets, credspath, date_change = FALSE, sh
 
     # Parse the JSON text
     creds <- fromJSON(creds_text)
-
     # Extract the credentials
-    email <- creds$email
-    email_pass <- creds$email_pass
-    username <- creds$username
-    pass <- creds$pass
-    dbname <- creds$dbname
-
-    sql <- read_sql(email = email, password = email_pass, url = url_sql)
+    sql <- read_sql(email = creds$email, password = creds$email_pass, url = url_sql)
 
     # Prevent the SQL query from being printed in the terminal
-    invisible(r <- get_query_auto(username = username, password = pass, dbname = dbname, sql))
+    invisible(r <- get_query_auto(username = creds$username, password = creds$pass, dbname = creds$dbname, sql))
 
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
@@ -39,6 +32,6 @@ run_function <- function(url_sql, url_sheets, credspath, date_change = FALSE, sh
     # Handle errors and log them
     error_msg <- conditionMessage(e)
     log_error(error_msg)
-    cat("Function encountered an error.See error_log please\n")
+    cat("Function encountered an error.See error_log please\n",num_chamado)
   })
 }
