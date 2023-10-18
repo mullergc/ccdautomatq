@@ -1,1 +1,4 @@
 exportPattern("^[[:alpha:]]+")
+export(get_sql)
+export(get_query_auto)
+export(write_query_sheet)

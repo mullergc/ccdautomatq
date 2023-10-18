@@ -1,7 +1,14 @@
-source('R/dependencies.R')
-#source('R/get_query.R')
-source('R/get_sql.R')
-source('R/write_sheets.R')
+# #source('R/get_query.R')
+# source('get_sql.R')
+# source('write_sheets.R')
+
+require('ROracle')
+require('googlesheets4')
+require('dplyr')
+require('jsonlite')
+require('lubridate')
+require('googledrive')
+require('devtools')
 
 
 get_query_auto <- function(usernamedb,passwordb,dbname,query){

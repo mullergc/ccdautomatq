@@ -17,3 +17,8 @@ Imports:
     jsonlite,
     lubridate,
     ROracle
+Collate:
+  'get_sql.R'
+  'write_sheets.R'
+  'get_query.R'
+  'dependencies.R'
