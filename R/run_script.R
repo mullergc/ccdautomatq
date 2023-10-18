@@ -2,13 +2,13 @@
 # source('get_sql.R')
 # source('write_sheets.R')
 
-require('ROracle')
-require('googlesheets4')
-require('dplyr')
-require('jsonlite')
-require('lubridate')
-require('googledrive')
-require('devtools')
+library('ROracle')
+library('googlesheets4')
+library('dplyr')
+library('jsonlite')
+library('lubridate')
+library('googledrive')
+library('devtools')
 
 
 
