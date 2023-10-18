@@ -7,7 +7,6 @@ library(jsonlite)
 library(devtools)
 
 # Add a dependency
-use_package('fromJSON')
 use_package('ROracle')
 use_package('googlesheets4')
 use_package('tidyverse')
