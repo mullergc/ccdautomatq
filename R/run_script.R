@@ -4,9 +4,9 @@ source('R/get_sql.R')
 source('R/write_sheets.R')
 
 # Define a function to log errors
-log_error <- function(error_msg,numchamado) {
+log_error <- function(error_msg,num_chamado) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
-  cat(error_log, file = paste0("error_log_",numchamado,".txt"), append = TRUE)
+  cat(error_log, file = paste0("error_log_",num_chamado,".txt"), append = TRUE)
 }
 
 # Define your run_function
@@ -33,7 +33,7 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
   }, error = function(e) {
     # Handle errors and log them
     error_msg <- conditionMessage(e)
-    log_error(error_msg,numchamado)
+    log_error(error_msg,num_chamado)
     cat("Function encountered an error.See error_log please\n",num_chamado)
   })
 }
