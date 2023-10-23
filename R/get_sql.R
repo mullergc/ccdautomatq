@@ -1,10 +1,8 @@
 
 read_sql <- function(email,url) {
 
-googledrive::drive_auth(email = email)
-
 codigo <- googledrive::drive_read_string(url,  encoding = "UTF8")
-  googlesheets4::gs4_auth(token = googledrive::drive_token())
-  return(codigo)
+googlesheets4::gs4_auth(token = googledrive::drive_token())
+return(codigo)
 
 }
