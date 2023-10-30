@@ -101,6 +101,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 #### FOR TESTING -----------------------------------------------------------------------------------------
 gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE', date_change = FALSE) {
   # Read the JSON file as text
+  start_time <- Sys.time()  # Define a default start time
+
   creds_text <- readLines(credspath, warn = FALSE)
 
   # Parse the JSON text
