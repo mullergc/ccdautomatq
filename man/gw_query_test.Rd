@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{gw_query_test}
 \alias{gw_query_test}
-\title{Função para automatização total porém, com o objetivo de teste#'}
+\title{Função para automatização total porém, com o objetivo de teste}
 \usage{
 gw_query_test(
   url_pedidos,
@@ -24,7 +24,7 @@ gw_query_test(
 \item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .}
 }
 \description{
-Função para automatização total porém, com o objetivo de teste#'
+Função para automatização total porém, com o objetivo de teste
 }
 \examples{
 NOT RUN

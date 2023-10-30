@@ -3,7 +3,7 @@
 \name{gw_query_auto}
 \alias{gw_query_auto}
 \title{gw_query_auto()
-Função para automatização total porém, com o objetivo de execução'}
+Função para automatização total porém, com o objetivo de execução}
 \usage{
 gw_query_auto(
   url_pedidos,
@@ -22,11 +22,11 @@ gw_query_auto(
 
 \item{status}{Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE}
 
-\item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.}
+\item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.}
 }
 \description{
 gw_query_auto()
-Função para automatização total porém, com o objetivo de execução'
+Função para automatização total porém, com o objetivo de execução
 }
 \examples{
 NOT RUN

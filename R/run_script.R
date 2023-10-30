@@ -50,12 +50,12 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
 
 
 #'gw_query_auto()
-#'Função para automatização total porém, com o objetivo de execução'
+#'Função para automatização total porém, com o objetivo de execução
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
 #' @param status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
-#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.
 #' @examples
 #' NOT RUN
 #' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
@@ -129,7 +129,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
 
 #### FOR TESTING -----------------------------------------------------------------------------------------
-#'Função para automatização total porém, com o objetivo de teste#'
+#'Função para automatização total porém, com o objetivo de teste
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
