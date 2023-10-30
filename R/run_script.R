@@ -98,7 +98,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
       time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
 
       # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
+      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query (minutes)", time_taken))
     })
   }
   # Success message
@@ -166,7 +166,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
       time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
 
       # Print the start and end times and the time taken for the current iteration
-      cat(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
+      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query (minutes)", time_taken))
 
     })
   }
