@@ -124,6 +124,8 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
+    start_time <- Sys.time()
+
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
