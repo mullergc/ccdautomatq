@@ -121,16 +121,16 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
   df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
     filter(stringr::str_detect(Periodicidade,periodo)) %>%
     filter(Status==status)
+  common_start_time <- Sys.time()
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
-    start_time <- Sys.time()
 
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
     url_sql <- df$url_sql[i]
-
+    start_time <- Sys.time()
 
     # Wrap the code that may cause an error in a tryCatch block
     tryCatch({
@@ -157,7 +157,10 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
     })
   }
   # Success message
+  total_end_time <- Sys.time()
+  total_time_taken <- total_end_time - common_start_time
   cat("Function executed successfully\n")
+  cat("Total execution time:", total_time_taken, "\n")
 }
 
 
