@@ -149,18 +149,19 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
       end_time <- Sys.time()
 
       # Calculate the time taken for the loop iteration
-      time_taken <- end_time - start_time
+      time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
 
       # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken))
+      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
 
     })
   }
   # Success message
   total_end_time <- Sys.time()
-  total_time_taken <- total_end_time - common_start_time
+  total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
+
   cat("Function executed successfully\n")
-  cat("Total execution time:", total_time_taken, "\n")
+  cat("Total execution time:", total_time_taken, "minutos")
 }
 
 
