@@ -130,10 +130,10 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
   }
   # Success message
   total_end_time <- Sys.time()
-  total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
+  #total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
   cat("Todas as queries executadas!\n")
-  print("Tempo de execução (minutos):", total_time_taken)
+ # print("Tempo de execução (minutos):", total_time_taken)
 }
 
 
@@ -213,5 +213,55 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
   total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
   cat("Todas as queries executadas!\n")
-  print("Tempo de execução (minutos):", total_time_taken)
+ # print("Tempo de execução (minutos):", total_time_taken)
+}
+
+
+
+#'Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no banco de dados
+#' @param params lista com os parâmetros do .
+#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @param url_sheets url onde será escrita a tabela.
+#' @param url_sql URl da localização do SQL
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
+#' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1',agumento opcional
+#' @examples
+#' NOT RUN
+#' num_chamado = '1111'
+#' url_sql='https://docs.google.com/spreadsheets/TESTE'
+#' url_sheets = 'C:/Users/Usuario/Desktop/creds.json'
+#' get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
+gfw_query <- function(params) {
+  # Use tryCatch to handle errors
+  tryCatch({
+    # Extract parameters from the list
+    num_chamado <- params$num_chamado
+    url_sql <- params$url_sql
+    url_sheets <- params$url_sheets
+    credspath <- params$credspath
+    date_change <- params$date_change
+    sheetname <- params$sheetname
+
+    # Read the JSON file as text
+    creds_text <- readLines(credspath, warn = FALSE)
+
+    # Parse the JSON text
+    creds <- jsonlite::fromJSON(creds_text)
+    # Extract the credentials
+    email <- creds$email
+    username <- creds$username
+    password <- creds$pass
+    dbname <- creds$dbname
+    sql <- read_sql(email = email, url = url_sql)
+    r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
+    write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
+
+    # Success message
+    cat("Function executed successfully\n")
+  }, error = function(e) {
+    # Handle errors and log them
+    error_msg <- conditionMessage(e)
+    log_error(error_msg, num_chamado)
+    cat("Function encountered an error. See error_log please\n", num_chamado)
+  })
 }
