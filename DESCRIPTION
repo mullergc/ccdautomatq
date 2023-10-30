@@ -6,7 +6,7 @@ Author: Centro de Ciência de Dados - HCPA
 Maintainer: Centro de Ciência de Dados - HCPA <ccd-centro-de-cincia-de-dados@hcpa.edu.br>
 Description: Este pacote é um sumário das principais funções utilizadas para extrair, escrever, ou seja, a automatização das queries.Para isso, é necessário que o pacote ROracle já esteja instalado em sua máquina.
 License: Licenca por favor
-Encoding:Portuguese_Brazil.1252
+Encoding:UTF-8
 LazyData: true
 Imports: 
   ROracle,
