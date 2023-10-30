@@ -1,5 +1,15 @@
 source('R/dependencies.R')
 #library(ROracle)
+
+#' Conecta e realiza à consulta à base, retorna a query
+#'
+#' @usernamedb credencial de usuário para acesso à base.
+#' @passwordb credencial de senha para acesso à base.
+#' @dbname A number.
+#' @query Código em sql, preferencialmente em string para realizar a consulta.
+#' @return Dataframe query.
+#' @examples
+#' get_query_auto('user', 'senha','nome_base','SELECT * FROM TABLE')
 get_query_auto <- function(usernamedb,passwordb,dbname,query){
   drv <- DBI::dbDriver("Oracle")
   con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)

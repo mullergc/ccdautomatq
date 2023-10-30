@@ -1,14 +1,19 @@
 #library(ROracle)
 
 
-# Define a function to log errors
+#'log_error()
+#'Função para automatização total porém, com o objetivo de teste
+#' @error_msg Mensagem de erro que será impressa caso haja erro no chamado
+#' @num_chamado Número do chamado passado automaticamente para a função, em caso de erro
 log_error <- function(error_msg,num_chamado) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
   cat(error_log, file = paste0("error_log_",num_chamado,".txt"), append = TRUE)
 }
 
 
-# Define a function to log errors
+#'log_error_gen()
+#'Função para automatização total porém, com o objetivo de teste
+#' @error_msg Mensagem de erro que será impressa caso haja erro geral
 log_error_gen <- function(error_msg) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
   cat(error_log, file = paste0("error_log_general",".txt"), append = TRUE)
@@ -43,6 +48,19 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
   })
 }
 
+
+#'gw_query_auto()
+#'Função para automatização total porém, com o objetivo de execução'
+#' @url_pedidos url ou link onde estão as informações para o loop.
+#' @credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.
+#' @examples
+#' NOT RUN
+#' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
+#' credspath = 'C:/Users/Usuario/Desktop/creds.json'
+#' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO', date_change = FALSE) {
   # Read the JSON file as text
   start_time <- Sys.time()  # Define a default start time
@@ -111,7 +129,18 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
 
 #### FOR TESTING -----------------------------------------------------------------------------------------
-gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE', date_change = FALSE) {
+#'Função para automatização total porém, com o objetivo de teste#'
+#' @url_pedidos url ou link onde estão as informações para o loop.
+#' @credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
+#' @examples
+#' NOT RUN
+#' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
+#' credspath = 'C:/Users/Usuario/Desktop/creds.json'
+#' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
+gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE) {
   # Read the JSON file as text
   start_time <- Sys.time()  # Define a default start time
 
@@ -147,15 +176,16 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
     start_time <- Sys.time()
 
     # Wrap the code that may cause an error in a tryCatch block
+    # Wrap the code that may cause an error in a tryCatch block
     tryCatch({
       # Read the SQL query from the Google Drive file
       sql <- read_sql(email = email, url = url_sql)
 
       # Execute the SQL query and get the results
       r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
-      urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
+      # urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
       # Write the results to the Google Sheets spreadsheet
-      write_query_sheet(df = r, url_destiny = urlsheets_teste, date_change = date_change, sheetname='Pagina1')
+      write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname='Pagina1')
     }, error = function(e) {
       # Handle the error
       error_msg <- conditionMessage(e)
@@ -167,7 +197,6 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
 
       # Print the start and end times and the time taken for the current iteration
       print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query (minutes)", time_taken))
-
     })
   }
   # Success message
