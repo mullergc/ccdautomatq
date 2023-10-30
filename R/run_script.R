@@ -166,7 +166,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
       time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
 
       # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
+      cat(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
 
     })
   }
@@ -175,7 +175,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
   total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
   cat("Function executed successfully\n")
-  print("Total execution time:", total_time_taken, "minutos")
+  cat("Total execution time:", total_time_taken, "minutos")
 }
 
 
