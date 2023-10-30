@@ -68,6 +68,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
+    start_time <- Sys.time()
+
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
@@ -88,6 +90,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
     })
+
   }
 
   # Success message
@@ -96,7 +99,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
 
 #### FOR TESTING -----------------------------------------------------------------------------------------
-gw_query_test <- function(url_pedidos, credspath,periodo='Diário', date_change = FALSE) {
+gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE', date_change = FALSE) {
   # Read the JSON file as text
   creds_text <- readLines(credspath, warn = FALSE)
 
@@ -117,7 +120,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário', date_change 
   # Read the Querys_Automatizacao_Gestao (Teti) sheet from the Google Sheets spreadsheet
   df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
     filter(stringr::str_detect(Periodicidade,periodo)) %>%
-    filter(Status=='ATIVO')
+    filter(Status==status)
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
@@ -142,6 +145,14 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário', date_change 
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
     })
+    # Get the current time and date at the end of the loop
+    end_time <- Sys.time()
+
+    # Calculate the time taken for the loop iteration
+    time_taken <- end_time - start_time
+
+    # Print the start and end times and the time taken for the current iteration
+    print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken))
   }
 
   # Success message
