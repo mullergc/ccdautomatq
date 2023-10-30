@@ -7,6 +7,11 @@ Função para automatização total porém, com o objetivo de teste}
 \usage{
 log_error(error_msg, num_chamado)
 }
+\arguments{
+\item{error_msg}{Mensagem de erro que será impressa caso haja erro no chamado}
+
+\item{num_chamado}{Número do chamado passado automaticamente para a função, em caso de erro}
+}
 \description{
 log_error()
 Função para automatização total porém, com o objetivo de teste

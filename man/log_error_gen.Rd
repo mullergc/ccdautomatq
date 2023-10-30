@@ -7,6 +7,9 @@ Função para automatização total porém, com o objetivo de teste}
 \usage{
 log_error_gen(error_msg)
 }
+\arguments{
+\item{error_msg}{Mensagem de erro que será impressa caso haja erro geral}
+}
 \description{
 log_error_gen()
 Função para automatização total porém, com o objetivo de teste

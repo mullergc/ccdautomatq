@@ -13,6 +13,17 @@ gw_query_auto(
   date_change = FALSE
 )
 }
+\arguments{
+\item{url_pedidos}{url ou link onde estão as informações para o loop.}
+
+\item{credspath}{caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.}
+
+\item{periodo}{Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.}
+
+\item{status}{Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE}
+
+\item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.}
+}
 \description{
 gw_query_auto()
 Função para automatização total porém, com o objetivo de execução'

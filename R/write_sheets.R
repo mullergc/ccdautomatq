@@ -1,10 +1,10 @@
 #require('dplyr')
 #'write_query_sheet()
 #' Função para escrever a tabela recuperada pela query em um documento do sheets.
-#'#' @df dataframe correspondente à consulta realizada a partir do sql.
-#' @url_destiny url onde será escrito a tabela.
-#' @sheetname nome da aba em que será escrita a tabela.
-#' @date_change Parâmetro que realiza a mudança de formato e fuso da data, TRUE/FALSE.
+#'#'@param df dataframe correspondente à consulta realizada a partir do sql.
+#' @param url_destiny url onde será escrito a tabela.
+#' @param sheetname nome da aba em que será escrita a tabela.
+#' @param date_change Parâmetro que realiza a mudança de formato e fuso da data, TRUE/FALSE.
 write_query_sheet <- function(df, url_destiny, sheetname = 'Página1', date_change = FALSE) {
   if (!date_change) {
     df_final <- df

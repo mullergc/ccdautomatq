@@ -6,6 +6,15 @@
 \usage{
 get_query_auto(usernamedb, passwordb, dbname, query)
 }
+\arguments{
+\item{usernamedb}{credencial de usuário para acesso à base.}
+
+\item{passwordb}{credencial de senha para acesso à base.}
+
+\item{dbname}{A number.}
+
+\item{query}{Código em sql, preferencialmente em string para realizar a consulta.}
+}
 \value{
 Dataframe query.
 }

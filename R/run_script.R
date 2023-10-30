@@ -3,8 +3,8 @@
 
 #'log_error()
 #'Função para automatização total porém, com o objetivo de teste
-#' @error_msg Mensagem de erro que será impressa caso haja erro no chamado
-#' @num_chamado Número do chamado passado automaticamente para a função, em caso de erro
+#' @param error_msg Mensagem de erro que será impressa caso haja erro no chamado
+#' @param num_chamado Número do chamado passado automaticamente para a função, em caso de erro
 log_error <- function(error_msg,num_chamado) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
   cat(error_log, file = paste0("error_log_",num_chamado,".txt"), append = TRUE)
@@ -13,7 +13,7 @@ log_error <- function(error_msg,num_chamado) {
 
 #'log_error_gen()
 #'Função para automatização total porém, com o objetivo de teste
-#' @error_msg Mensagem de erro que será impressa caso haja erro geral
+#' @param error_msg Mensagem de erro que será impressa caso haja erro geral
 log_error_gen <- function(error_msg) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
   cat(error_log, file = paste0("error_log_general",".txt"), append = TRUE)
@@ -51,11 +51,11 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
 
 #'gw_query_auto()
 #'Função para automatização total porém, com o objetivo de execução'
-#' @url_pedidos url ou link onde estão as informações para o loop.
-#' @credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
-#' @periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
-#' @status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
-#' @date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.
+#' @param url_pedidos url ou link onde estão as informações para o loop.
+#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @param status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas,, TRUE/FALSE.
 #' @examples
 #' NOT RUN
 #' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
@@ -130,11 +130,11 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
 #### FOR TESTING -----------------------------------------------------------------------------------------
 #'Função para automatização total porém, com o objetivo de teste#'
-#' @url_pedidos url ou link onde estão as informações para o loop.
-#' @credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
-#' @periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
-#' @status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
-#' @date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
+#' @param url_pedidos url ou link onde estão as informações para o loop.
+#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @param status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
 #' @examples
 #' NOT RUN
 #' url_pedidos='https://docs.google.com/spreadsheets/TESTE'

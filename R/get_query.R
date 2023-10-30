@@ -3,10 +3,10 @@ source('R/dependencies.R')
 
 #' Conecta e realiza à consulta à base, retorna a query
 #'
-#' @usernamedb credencial de usuário para acesso à base.
-#' @passwordb credencial de senha para acesso à base.
-#' @dbname A number.
-#' @query Código em sql, preferencialmente em string para realizar a consulta.
+#' @param usernamedb credencial de usuário para acesso à base.
+#' @param passwordb credencial de senha para acesso à base.
+#' @param dbname A number.
+#' @param query Código em sql, preferencialmente em string para realizar a consulta.
 #' @return Dataframe query.
 #' @examples
 #' get_query_auto('user', 'senha','nome_base','SELECT * FROM TABLE')
