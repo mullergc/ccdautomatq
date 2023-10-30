@@ -1,5 +1,4 @@
 #require('dplyr')
-#'write_query_sheet()
 #' Função para escrever a tabela recuperada pela query em um documento do sheets.
 #'#'@param df dataframe correspondente à consulta realizada a partir do sql.
 #' @param url_destiny url onde será escrito a tabela.

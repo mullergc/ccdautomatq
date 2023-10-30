@@ -2,7 +2,6 @@ source('R/dependencies.R')
 #library(ROracle)
 
 #' Conecta e realiza à consulta à base, retorna a query
-#'
 #' @param usernamedb credencial de usuário para acesso à base.
 #' @param passwordb credencial de senha para acesso à base.
 #' @param dbname A number.

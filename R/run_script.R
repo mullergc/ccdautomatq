@@ -1,7 +1,6 @@
 #library(ROracle)
 
 
-#'log_error()
 #'Função para automatização total porém, com o objetivo de teste
 #' @param error_msg Mensagem de erro que será impressa caso haja erro no chamado
 #' @param num_chamado Número do chamado passado automaticamente para a função, em caso de erro
@@ -11,7 +10,6 @@ log_error <- function(error_msg,num_chamado) {
 }
 
 
-#'log_error_gen()
 #'Função para automatização total porém, com o objetivo de teste
 #' @param error_msg Mensagem de erro que será impressa caso haja erro geral
 log_error_gen <- function(error_msg) {
@@ -49,7 +47,6 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
 }
 
 
-#'gw_query_auto()
 #'Função para automatização total porém, com o objetivo de execução
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
