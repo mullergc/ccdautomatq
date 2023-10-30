@@ -43,7 +43,7 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
   })
 }
 
-gw_query_auto <- function(url_pedidos, credspath,periodo='Diário', date_change = FALSE) {
+gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO', date_change = FALSE) {
   # Read the JSON file as text
   creds_text <- readLines(credspath, warn = FALSE)
 
@@ -64,7 +64,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário', date_change 
   # Read the Querys_Automatizacao_Gestao (Teti) sheet from the Google Sheets spreadsheet
   df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
         filter(stringr::str_detect(Periodicidade,periodo)) %>%
-        filter(Status=='ATIVO')
+        filter(Status==status)
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
