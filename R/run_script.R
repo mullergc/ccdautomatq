@@ -182,7 +182,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
       start_time <- Sys.time()
       cat('\n', 'Inicio chamado', num_chamado, 'as', format(start_time, format = "%Y-%m-%d %H:%M:%S"), '\n')
       # Read the SQL query from the Google Drive file
-      sql <- read_sql(email = email, url = url_sql)
+      sql <- read_sql2(email = email, url = url_sql)
 
       # Execute the SQL query and get the results
       r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
@@ -208,19 +208,8 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
 }
 
 
-#'Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no banco de dados
-#' @param params lista com os parâmetros da execução da função.
-#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
-#' @param url_sheets url onde será escrita a tabela.
-#' @param url_sql URl da localização do SQL
-#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
-#' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1',agumento opcional
-#' @examples
-#' NOT RUN
-#' num_chamado = '1111'
-#' url_sql='https://docs.google.com/spreadsheets/TESTE'
-#' url_sheets = 'C:/Users/Usuario/Desktop/creds.json'
-#' get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
+#'Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.
+#' @param params lista com os parâmetros da execução da função, deve ser da seguinte forma:params <- list(num_chamado = 123,url_sql = "your_sql_url",url_sheets = "your_sheets_url",url_tabela_filtro = "url da tabela de filtro",date_change = FALSE,DTHR_MIN_PERIODO = 'Data hora minima de filtro',FILTR_COL='Nome da coluna de filtro',DTHR_MAX_PERIODO = 'Data hora máxima de filtro').
 gfw_query <- function(params) {
   # Use tryCatch to handle errors
   tryCatch({
@@ -231,6 +220,11 @@ gfw_query <- function(params) {
     credspath <- params$credspath
     date_change <- params$date_change
     sheetname <- params$sheetname
+    url_tabela_filtro <- params$url_tabela_filtro
+    DTHR_MIN <- params$url_sql
+    DTHR_MAX <- params$DTHR_MAX_PERIODO
+    FILTRO <- params$FILTR_COL
+
 
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
@@ -242,8 +236,13 @@ gfw_query <- function(params) {
     username <- creds$username
     password <- creds$pass
     dbname <- creds$dbname
-    sql <- read_sql(email = email, url = url_sql)
-    r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
+    sql <- read_sql2(email = email, url = url_sql)
+    #sql <- read_sql2(email = email, url = url_sql2)
+    sql2 <- stringr::str_replace(sql,'DTHR_MIN_REPLACE',paste0("'",DTHR_MIN,"'"))
+    sql3 <- stringr::str_replace(sql2,'DTHR_MAX_REPLACE',paste0("'",DTHR_MAX,"'"))
+    sql4 <- stringr::str_replace(sql3,'PRONTS_REPLACE',paste(PRONTUARIO, collapse = ','))
+
+    r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql4)
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
     # Success message
