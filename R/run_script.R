@@ -225,7 +225,6 @@ gfw_query <- function(params) {
     DTHR_MAX <- params$DTHR_MAX_PERIODO
     FILTRO <- params$FILTR_COL
 
-
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
 
@@ -237,6 +236,8 @@ gfw_query <- function(params) {
     password <- creds$pass
     dbname <- creds$dbname
     sql <- read_sql2(email = email, url = url_sql)
+    df_filtro <- googlesheets4::read_sheet(ss = url_tabela_filtro)
+    PRONTUARIO =  df_filtro %>% dplyr::select(matches(FILTRO))
     #sql <- read_sql2(email = email, url = url_sql2)
     sql2 <- stringr::str_replace(sql,'DTHR_MIN_REPLACE',paste0("'",DTHR_MIN,"'"))
     sql3 <- stringr::str_replace(sql2,'DTHR_MAX_REPLACE',paste0("'",DTHR_MAX,"'"))
