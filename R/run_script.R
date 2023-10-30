@@ -105,8 +105,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
   total_end_time <- Sys.time()
   total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
-  cat("Function executed successfully\n")
-  print("Total execution time:", total_time_taken, "minutos")
+  cat("Todas as queries executadas!\n")
+  print("Tempo de execução (minutos):", total_time_taken)
 }
 
 
@@ -174,8 +174,8 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
   total_end_time <- Sys.time()
   total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
-  cat("Function executed successfully\n")
-  cat("Total execution time:", total_time_taken, "minutos")
+  cat("Todas as queries executadas!\n")
+  print("Tempo de execução (minutos):", total_time_taken)
 }
 
 
