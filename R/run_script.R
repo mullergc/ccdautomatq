@@ -70,10 +70,10 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
 #' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
 #' credspath = 'C:/Users/Usuario/Desktop/creds.json'
 #' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
-gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO', date_change = FALSE) {
+gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO', date_change = FALSE) {
   # Read the JSON file as text
-  start_time <- Sys.time()  # Define a default start time
-
+  error_counter <- 0  # Initialize error counter to 0
+  common_start_time <- Sys.time()  # Define a default start time
   creds_text <- readLines(credspath, warn = FALSE)
 
   # Parse the JSON text
@@ -91,49 +91,45 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
   googlesheets4::gs4_auth(token = googledrive::drive_token())
 
   # Read the Querys_Automatizacao_Gestao (Teti) sheet from the Google Sheets spreadsheet
-  df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
-    filter(stringr::str_detect(Periodicidade,periodo)) %>%
-    filter(Status==status)
-  common_start_time <- Sys.time()
+  df <- googlesheets4::read_sheet(ss = url_pedidos, sheet = "Querys_Automatizacao_Gestao") %>%
+    filter(stringr::str_detect(Periodicidade, periodo)) %>%
+    filter(Status == status)
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
-
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
     url_sql <- df$url_sql[i]
-    start_time <- Sys.time()
 
     # Wrap the code that may cause an error in a tryCatch block
     tryCatch({
+      start_time <- Sys.time()
+      cat('\n', 'Inicio chamado', num_chamado, 'as', format(start_time, format = "%Y-%m-%d %H:%M:%S"), '\n')
       # Read the SQL query from the Google Drive file
       sql <- read_sql(email = email, url = url_sql)
 
       # Execute the SQL query and get the results
       r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
-      # urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
       # Write the results to the Google Sheets spreadsheet
-      write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname='Pagina1')
+      write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname = 'Pagina1')
+      endtime <- Sys.time()
+      time_taken <- as.integer(difftime(endtime, start_time, units = "mins"))
+      cat('Fim do chamado', num_chamado, 'as', format(endtime, format = "%Y-%m-%d %H:%M:%S"), '\n', 'tempo de processamento:', time_taken, 'minutos')
     }, error = function(e) {
       # Handle the error
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
-      end_time <- Sys.time()
+      cat('\n','ERRO OCORRIDO NO CHAMADO', num_chamado, 'as', format(Sys.time(), format = "%Y-%m-%d %H:%M:%S"), '\n')
+      cat('\n','### VER AQUIVO DE LOG ###','\n')
 
-      # Calculate the time taken for the loop iteration
-      time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
-
-      # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query (minutes)", time_taken))
+      error_counter <- error_counter + 1  # Increment the error counter
     })
   }
-  # Success message
-  total_end_time <- Sys.time()
-  #total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
 
-  cat("Todas as queries executadas!\n")
- # print("Tempo de execução (minutos):", total_time_taken)
+  total_end_time <- Sys.time()
+  total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
+  cat('\n', 'Tempo de execução Total:', total_time_taken, 'minutos')
 }
 
 
@@ -151,8 +147,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 #' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE) {
   # Read the JSON file as text
-  start_time <- Sys.time()  # Define a default start time
-
+  error_counter <- 0  # Initialize error counter to 0
+  common_start_time <- Sys.time()  # Define a default start time
   creds_text <- readLines(credspath, warn = FALSE)
 
   # Parse the JSON text
@@ -170,56 +166,50 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
   googlesheets4::gs4_auth(token = googledrive::drive_token())
 
   # Read the Querys_Automatizacao_Gestao (Teti) sheet from the Google Sheets spreadsheet
-  df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
-    filter(stringr::str_detect(Periodicidade,periodo)) %>%
-    filter(Status==status)
-  common_start_time <- Sys.time()
+  df <- googlesheets4::read_sheet(ss = url_pedidos, sheet = "Querys_Automatizacao_Gestao") %>%
+    filter(stringr::str_detect(Periodicidade, periodo)) %>%
+    filter(Status == status)
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
-
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
     url_sql <- df$url_sql[i]
-    start_time <- Sys.time()
 
     # Wrap the code that may cause an error in a tryCatch block
-    # Wrap the code that may cause an error in a tryCatch block
     tryCatch({
+      start_time <- Sys.time()
+      cat('\n', 'Inicio chamado', num_chamado, 'as', format(start_time, format = "%Y-%m-%d %H:%M:%S"), '\n')
       # Read the SQL query from the Google Drive file
       sql <- read_sql(email = email, url = url_sql)
 
       # Execute the SQL query and get the results
       r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
-      # urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
       # Write the results to the Google Sheets spreadsheet
-      write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname='Pagina1')
+      write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname = 'Pagina1')
+      endtime <- Sys.time()
+      time_taken <- as.integer(difftime(endtime, start_time, units = "mins"))
+      cat('Fim do chamado', num_chamado, 'as', format(endtime, format = "%Y-%m-%d %H:%M:%S"), '\n', 'tempo de processamento:', time_taken, 'minutos')
     }, error = function(e) {
       # Handle the error
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
-      end_time <- Sys.time()
+      cat('\n','ERRO OCORRIDO NO CHAMADO', num_chamado, 'as', format(Sys.time(), format = "%Y-%m-%d %H:%M:%S"), '\n')
+      cat('\n','### VER AQUIVO DE LOG ###','\n')
 
-      # Calculate the time taken for the loop iteration
-      time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
-
-      # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query (minutes)", time_taken))
+      error_counter <- error_counter + 1  # Increment the error counter
     })
   }
-  # Success message
+
   total_end_time <- Sys.time()
   total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
-
-  cat("Todas as queries executadas!\n")
- # print("Tempo de execução (minutos):", total_time_taken)
+  cat('\n', 'Tempo de execução Total:', total_time_taken, 'minutos')
 }
 
 
-
 #'Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no banco de dados
-#' @param params lista com os parâmetros do .
+#' @param params lista com os parâmetros da execução da função.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param url_sheets url onde será escrita a tabela.
 #' @param url_sql URl da localização do SQL

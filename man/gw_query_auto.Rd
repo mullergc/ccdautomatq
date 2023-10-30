@@ -7,7 +7,7 @@
 gw_query_auto(
   url_pedidos,
   credspath,
-  periodo = "Diário",
+  periodo = "Diario",
   status = "ATIVO",
   date_change = FALSE
 )

@@ -8,7 +8,6 @@
 #' credspath = 'C:/Users/Usuario/Desktop/creds.json'
 #' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 read_sql <- function(email,url) {
-
 codigo <- googledrive::drive_read_string(url,  encoding = "UTF8")
 googlesheets4::gs4_auth(token = googledrive::drive_token())
 return(codigo)
