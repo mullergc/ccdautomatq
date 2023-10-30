@@ -45,6 +45,8 @@ run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change
 
 gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO', date_change = FALSE) {
   # Read the JSON file as text
+  start_time <- Sys.time()  # Define a default start time
+
   creds_text <- readLines(credspath, warn = FALSE)
 
   # Parse the JSON text
@@ -63,17 +65,18 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
   # Read the Querys_Automatizacao_Gestao (Teti) sheet from the Google Sheets spreadsheet
   df <- googlesheets4::read_sheet(ss=url_pedidos,sheet="Querys_Automatizacao_Gestao") %>%
-        filter(stringr::str_detect(Periodicidade,periodo)) %>%
-        filter(Status==status)
+    filter(stringr::str_detect(Periodicidade,periodo)) %>%
+    filter(Status==status)
+  common_start_time <- Sys.time()
 
   # Iterate through each row of the table
   for (i in 1:nrow(df)) {
-    start_time <- Sys.time()
 
     # Get the num_chamado, url_sheets, and url_sql for the current row
     num_chamado <- df$Qualitor[i]
     url_sheets <- df$url_output_sheet[i]
     url_sql <- df$url_sql[i]
+    start_time <- Sys.time()
 
     # Wrap the code that may cause an error in a tryCatch block
     tryCatch({
@@ -82,19 +85,28 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diário',status='ATIVO
 
       # Execute the SQL query and get the results
       r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql)
-     # urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
+      # urlsheets_teste = 'https://docs.google.com/spreadsheets/d/1Dj1sbvi-TAN6-llwRdvlMGO5sr5bteeWSEQU9VU65lA/edit?usp=sharing'
       # Write the results to the Google Sheets spreadsheet
       write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname='Pagina1')
     }, error = function(e) {
       # Handle the error
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
+      end_time <- Sys.time()
+
+      # Calculate the time taken for the loop iteration
+      time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
+
+      # Print the start and end times and the time taken for the current iteration
+      cat(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
     })
-
   }
-
   # Success message
+  total_end_time <- Sys.time()
+  total_time_taken <- as.integer(difftime(total_end_time, common_start_time, units = "mins"))
+
   cat("Function executed successfully\n")
+  cat("Total execution time:", total_time_taken, "minutos")
 }
 
 
@@ -154,7 +166,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
       time_taken <- as.integer(difftime(end_time, start_time, units = "mins"))
 
       # Print the start and end times and the time taken for the current iteration
-      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
+      cat(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken, "minutos"))
 
     })
   }
