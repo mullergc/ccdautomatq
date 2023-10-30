@@ -146,17 +146,16 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Diário',status='TESTE
       # Handle the error
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
+      end_time <- Sys.time()
+
+      # Calculate the time taken for the loop iteration
+      time_taken <- end_time - start_time
+
+      # Print the start and end times and the time taken for the current iteration
+      print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken))
+
     })
-    # Get the current time and date at the end of the loop
-    end_time <- Sys.time()
-
-    # Calculate the time taken for the loop iteration
-    time_taken <- end_time - start_time
-
-    # Print the start and end times and the time taken for the current iteration
-    print(paste("Chamado", num_chamado, "Hora de Início", start_time, "Hora de Fim", end_time, "Tempo query", time_taken))
   }
-
   # Success message
   cat("Function executed successfully\n")
 }
