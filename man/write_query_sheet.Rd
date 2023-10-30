@@ -2,8 +2,7 @@
 % Please edit documentation in R/write_sheets.R
 \name{write_query_sheet}
 \alias{write_query_sheet}
-\title{write_query_sheet()
-Função para escrever a tabela recuperada pela query em um documento do sheets.
+\title{Função para escrever a tabela recuperada pela query em um documento do sheets.
 #'@param df dataframe correspondente à consulta realizada a partir do sql.}
 \usage{
 write_query_sheet(df, url_destiny, sheetname = "Página1", date_change = FALSE)
@@ -16,7 +15,6 @@ write_query_sheet(df, url_destiny, sheetname = "Página1", date_change = FALSE)
 \item{date_change}{Parâmetro que realiza a mudança de formato e fuso da data, TRUE/FALSE.}
 }
 \description{
-write_query_sheet()
 Função para escrever a tabela recuperada pela query em um documento do sheets.
 #'@param df dataframe correspondente à consulta realizada a partir do sql.
 }

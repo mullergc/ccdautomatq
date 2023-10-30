@@ -2,8 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{gw_query_auto}
 \alias{gw_query_auto}
-\title{gw_query_auto()
-Função para automatização total porém, com o objetivo de execução}
+\title{Função para automatização total porém, com o objetivo de execução}
 \usage{
 gw_query_auto(
   url_pedidos,
@@ -25,7 +24,6 @@ gw_query_auto(
 \item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.}
 }
 \description{
-gw_query_auto()
 Função para automatização total porém, com o objetivo de execução
 }
 \examples{

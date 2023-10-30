@@ -18,8 +18,20 @@ log_error_gen <- function(error_msg) {
 }
 
 
-# Define your run_function
-run_function <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1') {
+#'Função para extração e escrever uma query apenas, sem filtrar
+#' @param num_chamado número do chamado dessa query.
+#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @param url_sheets url onde será escrita a tabela.
+#' @param url_sql URl da localização do SQL
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
+#' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
+#' @examples
+#' NOT RUN
+#' num_chamado = '1111'
+#' url_sql='https://docs.google.com/spreadsheets/TESTE'
+#' url_sheets = 'C:/Users/Usuario/Desktop/creds.json'
+#' get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
+get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1') {
   # Use tryCatch to handle errors
   tryCatch({
     # Read the JSON file as text

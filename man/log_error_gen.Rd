@@ -2,8 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{log_error_gen}
 \alias{log_error_gen}
-\title{log_error_gen()
-Função para automatização total porém, com o objetivo de teste}
+\title{Função para automatização total porém, com o objetivo de teste}
 \usage{
 log_error_gen(error_msg)
 }
@@ -11,6 +10,5 @@ log_error_gen(error_msg)
 \item{error_msg}{Mensagem de erro que será impressa caso haja erro geral}
 }
 \description{
-log_error_gen()
 Função para automatização total porém, com o objetivo de teste
 }
