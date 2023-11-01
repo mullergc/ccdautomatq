@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sql.R
 \name{read_sql}
 \alias{read_sql}
-\title{Função específica para ler o código em sql e  retorná-lo em formato de string}
+\title{read_sql}
 \usage{
 read_sql(email, url)
 }

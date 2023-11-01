@@ -1,4 +1,4 @@
-#'read_sql(email,url)
+#'@title  read_sql
 #'@description Função específica para ler o código em sql e  retorná-lo em formato de string
 #' @param email email de acesso, deve estar dentro da credencial em json
 #' @param url url onde está o sql, deve estar compartilhado com o email de acesso.
@@ -14,7 +14,8 @@ googlesheets4::gs4_auth(token = googledrive::drive_token())
 return(codigo)
 }
 
-#'Função para leitura do sql, com maior estabilidade e independente do encoding
+#'@title read_sql2
+#'@description Função para leitura do sql, com maior estabilidade e independente do encoding
 #' @param email email de acesso, deve estar dentro da credencial em json
 #' @param url url onde está o sql, deve estar compartilhado com o email de acesso.
 #' @return retorna o código em sql, em formato de string para utilização na função que faz a consulta à query

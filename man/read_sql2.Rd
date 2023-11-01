@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sql.R
 \name{read_sql2}
 \alias{read_sql2}
-\title{Função para leitura do sql, com maior estabilidade e independente do encoding}
+\title{read_sql2}
 \usage{
 read_sql2(email, url)
 }
