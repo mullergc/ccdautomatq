@@ -2,30 +2,13 @@
 % Please edit documentation in R/run_script.R
 \name{gfw_query}
 \alias{gfw_query}
-\title{Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no banco de dados}
+\title{Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.}
 \usage{
 gfw_query(params)
 }
 \arguments{
-\item{params}{lista com os parâmetros da execução da função.}
-
-\item{credspath}{caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.}
-
-\item{url_sheets}{url onde será escrita a tabela.}
-
-\item{url_sql}{URl da localização do SQL}
-
-\item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.}
-
-\item{sheetname}{Parâmetro com o nome da aba, default é 'Pagina1',agumento opcional}
+\item{params}{lista com os parâmetros da execução da função, deve ser da seguinte forma:params <- list(num_chamado = 123,url_sql = "your_sql_url",url_sheets = "your_sheets_url",url_tabela_filtro = "url da tabela de filtro",date_change = FALSE,DTHR_MIN_PERIODO = 'Data hora minima de filtro',FILTR_COL='Nome da coluna de filtro',DTHR_MAX_PERIODO = 'Data hora máxima de filtro').}
 }
 \description{
-Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no banco de dados
-}
-\examples{
-NOT RUN
-num_chamado = '1111'
-url_sql='https://docs.google.com/spreadsheets/TESTE'
-url_sheets = 'C:/Users/Usuario/Desktop/creds.json'
-get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
+Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.
 }

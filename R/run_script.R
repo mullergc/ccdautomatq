@@ -49,12 +49,12 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
     # Success message
-    cat("Function executed successfully\n")
+    cat("Query executada sem erros!\n")
   }, error = function(e) {
     # Handle errors and log them
     error_msg <- conditionMessage(e)
     log_error(error_msg,num_chamado)
-    cat("Function encountered an error.See error_log please\n",num_chamado)
+    cat("Função encontrou erro, veja arquivo de log\n",num_chamado)
   })
 }
 
@@ -121,7 +121,7 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO'
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
       cat('\n','ERRO OCORRIDO NO CHAMADO', num_chamado, 'as', format(Sys.time(), format = "%Y-%m-%d %H:%M:%S"), '\n')
-      cat('\n','### VER AQUIVO DE LOG ###','\n')
+      cat('\n','### VER ARQUIVO DE LOG ###','\n')
 
       error_counter <- error_counter + 1  # Increment the error counter
     })
