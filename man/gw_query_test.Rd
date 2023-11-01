@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{gw_query_test}
 \alias{gw_query_test}
-\title{Função para automatização total porém, com o objetivo de teste}
+\title{gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE)}
 \usage{
 gw_query_test(
   url_pedidos,

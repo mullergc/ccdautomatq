@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{get_query}
 \alias{get_query}
-\title{Função para extração e escrever uma query apenas, sem filtrar}
+\title{get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')}
 \usage{
 get_query(
   num_chamado,

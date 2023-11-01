@@ -15,8 +15,6 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
   result <- ROracle::dbGetQuery(con, query)
 
   # Close the database connection
-  dbDisconnect(con)
-
   return(result)
 }
 
@@ -34,8 +32,6 @@ get_query_window <- function(query){
 
   result <- ROracle::dbGetQuery(con, query)
 
-  # Close the database connection
-  dbDisconnect(con)
 
   return(result)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{gw_query_auto}
 \alias{gw_query_auto}
-\title{Função para automatização total porém, com o objetivo de execução}
+\title{gw_query_auto}
 \usage{
 gw_query_auto(
   url_pedidos,

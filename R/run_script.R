@@ -1,7 +1,7 @@
 #library(ROracle)
 
-
-#'Função para automatização total porém, com o objetivo de teste
+#'@title log_error_gen(error_msg)
+#'@description Função para erro por chamado
 #' @param error_msg Mensagem de erro que será impressa caso haja erro no chamado
 #' @param num_chamado Número do chamado passado automaticamente para a função, em caso de erro
 log_error <- function(error_msg,num_chamado) {
@@ -10,7 +10,8 @@ log_error <- function(error_msg,num_chamado) {
 }
 
 
-#'Função para automatização total porém, com o objetivo de teste
+#'@title log_error_gen(error_msg)
+#'@description Função para erro geral
 #' @param error_msg Mensagem de erro que será impressa caso haja erro geral
 log_error_gen <- function(error_msg) {
   error_log <- paste0(Sys.time(), " - Error: ", error_msg, "\n")
@@ -18,7 +19,8 @@ log_error_gen <- function(error_msg) {
 }
 
 
-#'Função para extração e escrever uma query apenas, sem filtrar
+#'@title get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
+#'@description Função para extração e escrever uma query apenas, sem filtrar
 #' @param num_chamado número do chamado dessa query.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param url_sheets url onde será escrita a tabela.
@@ -59,7 +61,8 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
 }
 
 
-#'Função para automatização total porém, com o objetivo de execução
+#' @title gw_query_auto
+#'@description Função para automatização total porém, com o objetivo de execução
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
@@ -134,7 +137,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO'
 
 
 #### FOR TESTING -----------------------------------------------------------------------------------------
-#'Função para automatização total porém, com o objetivo de teste
+#' @title gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE)
+#' @description Função para automatização total porém, com o objetivo de teste
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
 #' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
@@ -196,7 +200,7 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
       error_msg <- conditionMessage(e)
       log_error(error_msg, num_chamado)
       cat('\n','ERRO OCORRIDO NO CHAMADO', num_chamado, 'as', format(Sys.time(), format = "%Y-%m-%d %H:%M:%S"), '\n')
-      cat('\n','### VER AQUIVO DE LOG ###','\n')
+      cat('\n','### VER ARQUIVO DE LOG ###','\n')
 
       error_counter <- error_counter + 1  # Increment the error counter
     })
@@ -208,7 +212,8 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
 }
 
 
-#'Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.
+#'@title gfw_query(params)
+#'@description Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.
 #' @param params lista com os parâmetros da execução da função, deve ser da seguinte forma:params <- list(num_chamado = 123,url_sql = "your_sql_url",url_sheets = "your_sheets_url",url_tabela_filtro = "url da tabela de filtro",date_change = FALSE,DTHR_MIN_PERIODO = 'Data hora minima de filtro',FILTR_COL='Nome da coluna de filtro',DTHR_MAX_PERIODO = 'Data hora máxima de filtro').
 gfw_query <- function(params) {
   # Use tryCatch to handle errors
@@ -247,11 +252,11 @@ gfw_query <- function(params) {
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
     # Success message
-    cat("Function executed successfully\n")
+    cat("Consulta executada com sucesso\n")
   }, error = function(e) {
     # Handle errors and log them
     error_msg <- conditionMessage(e)
     log_error(error_msg, num_chamado)
-    cat("Function encountered an error. See error_log please\n", num_chamado)
+    cat("Erro encontrado, veja error_log \n", num_chamado)
   })
 }

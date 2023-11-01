@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{gfw_query}
 \alias{gfw_query}
-\title{Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.}
+\title{gfw_query(params)}
 \usage{
 gfw_query(params)
 }

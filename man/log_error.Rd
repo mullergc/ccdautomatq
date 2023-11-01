@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_script.R
 \name{log_error}
 \alias{log_error}
-\title{Função para automatização total porém, com o objetivo de teste}
+\title{log_error_gen(error_msg)}
 \usage{
 log_error(error_msg, num_chamado)
 }
@@ -12,5 +12,5 @@ log_error(error_msg, num_chamado)
 \item{num_chamado}{Número do chamado passado automaticamente para a função, em caso de erro}
 }
 \description{
-Função para automatização total porém, com o objetivo de teste
+Função para erro por chamado
 }
