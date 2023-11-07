@@ -12,8 +12,26 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
-
-```{r setup}
 library(ccdautomatq)
 ```
+
+# CCDAUTOMATQ Vignette
+
+## Introduction
+
+This vignette provides documentation for the `read_sql2` function in the CCDAUTOMATQ package.
+
+## `read_sql2` Function
+
+The `read_sql2` function is designed to read SQL code from a specified URL with enhanced stability and encoding independence.
+`@rdname{package::function}`
+
+## Example
+Here's an example of how to use the `read_sql2` function:
+
+```{r eval=FALSE}
+# Example usage
+url_pedidos <- 'https://docs.google.com/spreadsheets/TESTE'
+creds_path <- 'path/to/creds.json'
+sql_code <- read_sql2(email = 'your@email.com', url = url_pedidos)
+cat(sql_code)

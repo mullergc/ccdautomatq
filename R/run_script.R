@@ -226,7 +226,7 @@ gfw_query <- function(params) {
     date_change <- params$date_change
     sheetname <- params$sheetname
     url_tabela_filtro <- params$url_tabela_filtro
-    DTHR_MIN <- params$url_sql
+    DTHR_MIN <- params$DTHR_MIN_PERIODO
     DTHR_MAX <- params$DTHR_MAX_PERIODO
     FILTRO <- params$FILTR_COL
 
@@ -243,12 +243,15 @@ gfw_query <- function(params) {
     sql <- read_sql2(email = email, url = url_sql)
     df_filtro <- googlesheets4::read_sheet(ss = url_tabela_filtro)
     PRONTUARIO =  df_filtro %>% dplyr::select(matches(FILTRO))
-    #sql <- read_sql2(email = email, url = url_sql2)
-    sql2 <- stringr::str_replace(sql,'DTHR_MIN_REPLACE',paste0("'",DTHR_MIN,"'"))
-    sql3 <- stringr::str_replace(sql2,'DTHR_MAX_REPLACE',paste0("'",DTHR_MAX,"'"))
-    sql4 <- stringr::str_replace(sql3,'PRONTS_REPLACE',paste(PRONTUARIO, collapse = ','))
+    # Convert PRONTUARIO to a comma-separated string
+    prontuario_list <- paste(PRONTUARIO$PRONTUARIO, collapse = ',')
 
-    r <- get_query_auto(usernamedb = username, passwordb = password, dbname = dbname, query = sql4)
+
+
+    #param_values<-seq_along(PRONTUARIO)
+    #sql <- read_sql2(email = email, url = url_sql2)
+    sql2 <- stringr::str_replace_all(sql, c(":DTHR_MIN_REPLACE" = paste0("'",DTHR_MIN,"'"), ":DTHR_MAX_REPLACE" = paste0("'",DTHR_MAX,"'"),':PRONTS_REPLACE'=prontuario_list))
+    r <- get_query_auto2(usernamedb = username, passwordb = password, dbname = dbname, query = sql2)
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
     # Success message

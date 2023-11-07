@@ -25,14 +25,14 @@ return(codigo)
 #' credspath = 'C:/Users/Usuario/Desktop/creds.json'
 #' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 read_sql2 <- function(email,url) {
-  drive_auth(email=email,use_oob = FALSE)
+  googledrive::drive_auth(email=email,use_oob = FALSE)
 
   ## identify this folder on Drive
   ## let googledrive know this is a file ID or URL, as opposed to file name
   id_sql <- as_id(url)
   temp <- tempfile(fileext = '.sql')
   dl <- googledrive::drive_download(id_sql, path = temp, overwrite = TRUE)
-  sql_content <- readLines(temp)
+  sql_content <- readLines(temp,encoding='UTF-8')
   sql_query <- paste(sql_content, collapse = "\n")
   googlesheets4::gs4_auth(token = googledrive::drive_token())
   return(sql_query)

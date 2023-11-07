@@ -19,6 +19,16 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
 }
 
 
+get_query_auto2 <- function(usernamedb,passwordb,dbname,query){
+  drv <- DBI::dbDriver("Oracle")
+  con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
+  result <- ROracle::oracleProc(con, query)
+
+  # Close the database connection
+  return(result)
+}
+
+
 get_query_window <- function(query){
   drv <- DBI::dbDriver("Oracle")
   con <- ROracle::dbConnect(drv,
