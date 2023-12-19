@@ -70,7 +70,7 @@ get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath
     username <- creds$username
     password <- creds$pass
     dbname <- creds$dbname
-    sql <- read_sql2(email = email, url = url_sql)
+    sql <- read_sql(email = email, url = url_sql)
     r <-get_query_sqlserver()
     write_query_sheet(df = r, url_destiny = url_sheets, date_change = date_change, sheetname)
 
