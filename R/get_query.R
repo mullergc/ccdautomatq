@@ -1,4 +1,4 @@
-source('R/dependencies.R')
+##source('R/dependencies.R')
 #
 #
 
@@ -12,8 +12,6 @@ source('R/dependencies.R')
 #' @param dbname A number.
 #' @param query Código em sql, preferencialmente em string para realizar a consulta.
 #' @return Dataframe query.
-#' @examples
-#' get_query_auto('user', 'senha','nome_base','SELECT * FROM TABLE')
 get_query_auto <- function(usernamedb,passwordb,dbname,query){
   drv <- DBI::dbDriver("Oracle")
   con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
@@ -23,13 +21,15 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
   return(result)
 }
 
-
-#' Conecta e realiza à consulta à base, retorna a query
+#'@title get_query_sqlserver(query)
+#'@description Função para extração de uma query apenas, usando a conexão do sql server, que funcione, é necessario q o driver odbc esteja funcionante já
 #' Para setar a conexão com o SQL server, primeiramente necessário configurar o driver, com  a base, ver
 #'https://turbofuture.com/computers/Connect-to-SQL-Server-from-R
+#'para instruções: https://turbofuture.com/computers/Connect-to-SQL-Server-from-R#' Conecta e realiza à consulta à base, retorna a query
+#'é possivel passar uma string com o SQL como "select * from dbase" ou uma string lida por um arquivo.
+#'é importante ressaltar que nesse caso, no SQL o caminho da base deve estar completo
 #' @param query Código em sql, preferencialmente em string para realizar a consulta.
 #' @return Dataframe query.
-#' @examples
 get_query_sqlserver <- function(query){
   conn = RODBC::odbcConnect("SQL Server")
   result <- RODBC::sqlQuery(conn, query)

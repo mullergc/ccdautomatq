@@ -17,8 +17,3 @@ retorna o código em sql, em formato de string para utilização na função que
 \description{
 Função específica para ler o código em sql e  retorná-lo em formato de string
 }
-\examples{
-url_pedidos='https://docs.google.com/spreadsheets/TESTE'
-credspath = 'C:/Users/Usuario/Desktop/creds.json'
-gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
-}

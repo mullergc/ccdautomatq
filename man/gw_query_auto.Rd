@@ -17,17 +17,12 @@ gw_query_auto(
 
 \item{credspath}{caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.}
 
-\item{periodo}{Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.}
+\item{periodo}{periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.}
 
-\item{status}{Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE}
+\item{status}{status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE}
 
 \item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.}
 }
 \description{
 Função para automatização total porém, com o objetivo de execução
-}
-\examples{
-url_pedidos='https://docs.google.com/spreadsheets/TESTE'
-credspath = 'C:/Users/Usuario/Desktop/creds.json'
-gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 }

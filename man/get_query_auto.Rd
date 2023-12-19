@@ -21,6 +21,3 @@ Dataframe query.
 \description{
 Conecta e realiza à consulta à base, retorna a query
 }
-\examples{
-get_query_auto('user', 'senha','nome_base','SELECT * FROM TABLE')
-}

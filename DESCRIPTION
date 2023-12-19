@@ -10,9 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
   googlesheets4,
-  dplyr,
   jsonlite,
-  lubridate,
   googledrive,
   devtools,
   DBI,

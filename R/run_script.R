@@ -27,11 +27,6 @@ log_error_gen <- function(error_msg) {
 #' @param url_sql URl da localização do SQL
 #' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
 #' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
-#' @examples
-#' num_chamado = '1111'
-#' url_sql='https://docs.google.com/spreadsheets/TESTE'
-#' url_sheets = 'C:/Users/Usuario/Desktop/creds.json'
-#' get_query(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1')
 get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1') {
   # Use tryCatch to handle errors
   tryCatch({
@@ -59,7 +54,17 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
   })
 }
 
-get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina_1"){
+
+#'@title get_write_query_sqlserver(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina1")
+#'@description Função para extração e escrever uma query apenas, usando a conexão do sql server, que funcione, é necessario q o driver odbc esteja funcionante já
+#'para instruções: https://turbofuture.com/computers/Connect-to-SQL-Server-from-R
+#' @param num_chamado número do chamado dessa query.
+#' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
+#' @param url_sheets url onde será escrita a tabela.
+#' @param url_sql URL da localização do SQL
+#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
+#' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
+get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina1"){
    tryCatch({
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
@@ -88,13 +93,9 @@ get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath
 #'@description Função para automatização total porém, com o objetivo de execução
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
-#' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
-#' @param status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @param periodo periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @param status status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
 #' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.
-#' @examples
-#' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
-#' credspath = 'C:/Users/Usuario/Desktop/creds.json'
-#' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
 gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO', date_change = FALSE) {
   # Read the JSON file as text
   error_counter <- 0  # Initialize error counter to 0
@@ -163,13 +164,9 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO'
 #' @description Função para automatização total porém, com o objetivo de teste
 #' @param url_pedidos url ou link onde estão as informações para o loop.
 #' @param credspath caminho do arquivo em json com as credenciais de acesso para a base e email, deve ser armazenado localmente.
-#' @param periodo Periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
-#' @param status Status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
-#' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
-#' @examples
-#' url_pedidos='https://docs.google.com/spreadsheets/TESTE'
-#' credspath = 'C:/Users/Usuario/Desktop/creds.json'
-#' gw_query_test(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = TRUE)
+#' @param periodo periodicidade das queries, deve ser selecionada/ser igual a Diario/Mensal/Homolog/Semanal.
+#' @param status status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
+#' @param date_change parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
 gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE) {
   # Read the JSON file as text
   error_counter <- 0  # Initialize error counter to 0
