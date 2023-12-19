@@ -30,7 +30,6 @@ get_query(
 Função para extração e escrever uma query apenas, sem filtrar
 }
 \examples{
-NOT RUN
 num_chamado = '1111'
 url_sql='https://docs.google.com/spreadsheets/TESTE'
 url_sheets = 'C:/Users/Usuario/Desktop/creds.json'

@@ -1,4 +1,9 @@
 source('R/dependencies.R')
+#
+#
+
+#
+
 #library(ROracle)
 
 #' Conecta e realiza à consulta à base, retorna a query
@@ -17,6 +22,20 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
   # Close the database connection
   return(result)
 }
+
+
+#' Conecta e realiza à consulta à base, retorna a query
+#' Para setar a conexão com o SQL server, primeiramente necessário configurar o driver, com  a base, ver
+#'https://turbofuture.com/computers/Connect-to-SQL-Server-from-R
+#' @param query Código em sql, preferencialmente em string para realizar a consulta.
+#' @return Dataframe query.
+#' @examples
+get_query_sqlserver <- function(query){
+  conn = RODBC::odbcConnect("SQL Server")
+  result <- sqlQuery(conn, query)
+  return(result)
+}
+
 
 
 get_query_auto2 <- function(usernamedb,passwordb,dbname,query){

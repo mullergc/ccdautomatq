@@ -9,13 +9,14 @@ License: Licenca por favor
 Encoding: UTF-8
 LazyData: true
 Imports: 
-  ROracle,
   googlesheets4,
   dplyr,
   jsonlite,
   lubridate,
   googledrive,
-  devtools
+  devtools,
+  DBI,
+  RODBC
 Depends:
   dplyr,
   lubridate
