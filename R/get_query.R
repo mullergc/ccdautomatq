@@ -32,7 +32,7 @@ get_query_auto <- function(usernamedb,passwordb,dbname,query){
 #' @examples
 get_query_sqlserver <- function(query){
   conn = RODBC::odbcConnect("SQL Server")
-  result <- sqlQuery(conn, query)
+  result <- RODBC::sqlQuery(conn, query)
   return(result)
 }
 
