@@ -59,7 +59,7 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
   })
 }
 
-get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE){
+get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina_1"){
    tryCatch({
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
