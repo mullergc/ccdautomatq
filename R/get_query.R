@@ -13,6 +13,8 @@
 #' @param query Código em sql, preferencialmente em string para realizar a consulta.
 #' @return Dataframe query.
 get_query_auto <- function(usernamedb,passwordb,dbname,query){
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+
   drv <- DBI::dbDriver("Oracle")
   con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
   result <- ROracle::dbGetQuery(con, query)
@@ -39,6 +41,8 @@ get_query_sqlserver <- function(query){
 
 
 get_query_auto2 <- function(usernamedb,passwordb,dbname,query){
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+
   drv <- DBI::dbDriver("Oracle")
   con <- ROracle::dbConnect(drv, username = usernamedb, password = passwordb, dbname = dbname)
   result <- ROracle::oracleProc(con, query)

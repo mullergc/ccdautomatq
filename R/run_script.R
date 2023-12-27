@@ -28,6 +28,7 @@ log_error_gen <- function(error_msg) {
 #' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
 #' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
 get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE, sheetname = 'Pagina1') {
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
   # Use tryCatch to handle errors
   tryCatch({
     # Read the JSON file as text
@@ -66,6 +67,7 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
 #' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
 get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina1"){
    tryCatch({
+    Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
     # Parse the JSON text
@@ -97,6 +99,8 @@ get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath
 #' @param status status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
 #' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE.
 gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO', date_change = FALSE) {
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+
   # Read the JSON file as text
   error_counter <- 0  # Initialize error counter to 0
   common_start_time <- Sys.time()  # Define a default start time
@@ -168,6 +172,8 @@ gw_query_auto <- function(url_pedidos, credspath,periodo='Diario',status='ATIVO'
 #' @param status status do pedido na tabela das queries,  deve ser selecionada/ser igual ATIVO,Cancelada,TESTE
 #' @param date_change parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas .
 gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE', date_change = FALSE) {
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+
   # Read the JSON file as text
   error_counter <- 0  # Initialize error counter to 0
   common_start_time <- Sys.time()  # Define a default start time
@@ -234,6 +240,8 @@ gw_query_test <- function(url_pedidos, credspath,periodo='Homolog',status='TESTE
 #'@description Função para extração e escrever uma query apenas, com uma tabela de filtro, escrevendo a tabela resultante no sheets.
 #' @param params lista com os parâmetros da execução da função, deve ser da seguinte forma:params <- list(num_chamado = 123,url_sql = "your_sql_url",url_sheets = "your_sheets_url",url_tabela_filtro = "url da tabela de filtro",date_change = FALSE,DTHR_MIN_PERIODO = 'Data hora minima de filtro',FILTR_COL='Nome da coluna de filtro',DTHR_MAX_PERIODO = 'Data hora máxima de filtro').
 gfw_query <- function(params) {
+  Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+
   # Use tryCatch to handle errors
   tryCatch({
     # Extract parameters from the list
