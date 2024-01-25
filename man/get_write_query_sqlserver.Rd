@@ -10,7 +10,8 @@ get_write_query_sqlserver(
   url_sheets,
   credspath,
   date_change = FALSE,
-  sheetname = "Pagina1"
+  sheetname = "Pagina1",
+  encoding = "pt_BR.UTF-8"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ get_write_query_sqlserver(
 \item{date_change}{Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.}
 
 \item{sheetname}{Parâmetro com o nome da aba, default é 'Pagina1'}
+
+\item{encoding}{Codificação para caracteres especiais, o default é "pt_BR.UTF-8", caso deseje mudar para Latin-1 troque por "Portuguese_Brazil.1252"}
 }
 \description{
 Função para extração e escrever uma query apenas, usando a conexão do sql server, que funcione, é necessario q o driver odbc esteja funcionante já

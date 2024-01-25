@@ -65,9 +65,10 @@ get_query <- function(num_chamado,url_sql, url_sheets, credspath, date_change = 
 #' @param url_sql URL da localização do SQL
 #' @param date_change Parâmetro se a data-hora será convertida para o fuso correto, preferencialmente para impedir inconsistências de datas, TRUE/FALSE,default é FALSE.
 #' @param sheetname Parâmetro com o nome da aba, default é 'Pagina1'
-get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina1"){
+#' @param encoding Codificação para caracteres especiais, o default é "pt_BR.UTF-8", caso deseje mudar para Latin-1 troque por "Portuguese_Brazil.1252"
+get_write_query_sqlserver <- function(num_chamado,url_sql, url_sheets, credspath, date_change = FALSE,sheetname="Pagina1",encoding="pt_BR.UTF-8"){
    tryCatch({
-    Sys.setlocale("LC_ALL", "Portuguese_Brazil.1252")
+    Sys.setlocale("LC_ALL", encoding)
     # Read the JSON file as text
     creds_text <- readLines(credspath, warn = FALSE)
     # Parse the JSON text
